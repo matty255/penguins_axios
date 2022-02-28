@@ -1,0 +1,12 @@
+import { getCookie } from "../shared/Cookie";
+
+import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_MAGAZINE_API_BASE_URL,
+});
+
+const token = getCookie("token");
+
+
+export { instance , token };
