@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { NonGrid, Button, Text, Image, Title } from "../elements";
 import NotiBadge from "./NotiBadge";
@@ -17,19 +17,25 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.user);
+  // const is_login = useSelector((state) => state.user.user);
   const user_info = useSelector((state) => state.user.user);
   const is_token = getCookie("token") ? true : false;
   // const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
   // const is_session = sessionStorage.getItem(_session_key) ? true : false;
-  
+
+  useEffect(() => {
+    if (is_token) {
+      userActions.loginCheck();
+    } else {
+      return
+    }
+  }, []);
   if (is_token) {
     return (
       
       <NonGrid>
-        {is_token? is_login===true : ""}
         <Title _onClick={() => {
-              window.location.replace("/");
+              history.push("/");
             }} is_click={true}>
                 Penguins
         </Title>

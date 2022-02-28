@@ -64,8 +64,9 @@ const loginAxios = (username, password) => {
         if (res.status === 200) {
           dispatch(setUser({ username, password }));
           window.alert('로그인 되었습니다.');
-          history.replace('/');
           setCookie("token", res.data);
+          window.location.replace("/")
+          
         }
       })
       .catch((err) => window.alert('로그인 실패: ', err.message));
@@ -77,29 +78,7 @@ const loginAxios = (username, password) => {
 const loginCheck = (token) => {
   return function (dispatch, getState, { history }) {
     if (token) {
-      instance
-        .get(
-          "api/user",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-          { withCredentials: true }
-        )
-        .then((res) => {
-          return res.data;
-        })
-        .then((data) => {
-          const user_info = {
-            username: data.username,
-            name: data.name,
-          };
-          dispatch(checkUser(user_info));
-        })
-        .catch((err) => console.log(err));
-    } else {
-      return;
+      dispatch(checkUser)
     }
   };
 };
