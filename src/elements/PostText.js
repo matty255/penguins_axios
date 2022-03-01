@@ -8,16 +8,12 @@ const P = tw.p`
 `;
 
 const PostText = (props) => {
-  const { children, margin, width, bold, _onClick, is_click, center, is_false } =
+  const { children, _onClick, is_click, is_false } =
     props;
 
   const styles = {
     children,
-    margin,
-    width,
-    bold,
     is_click,
-    center,
     is_false,
   };
   return (
@@ -29,12 +25,8 @@ const PostText = (props) => {
 
 Text.defaultProps = {
   children: null,
-  margin: false,
-  bold: false,
   _onClick: () => {},
   is_click: false,
-  width: false,
-  center: false,
   is_false : false
 };
 

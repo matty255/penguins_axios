@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Input, Button, Intro } from "../elements";
+import React, { useRef, useState } from "react";
+import { Input, Button } from "../elements";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as imageActions } from "../redux/modules/image";

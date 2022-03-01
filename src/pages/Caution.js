@@ -3,7 +3,7 @@ import { Text, Button, NonFlexBox } from "../elements";
 
 import { history } from "../redux/configureStore";
 
-const Caution = (props) => {
+const Caution = () => {
   return (
     <NonFlexBox>
       <Text>

@@ -1,4 +1,4 @@
-import { createAction, createActions, handleActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
 import { storage } from "../../shared/firebase";

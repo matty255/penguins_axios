@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-import { NonGrid, Button, Text, Image, Title } from "../elements";
+import { NonGrid, Button, Title } from "../elements";
 import Permit from "../shared/Permit";
-import { getCookie, deleteCookie } from "../shared/Cookie";
+import { getCookie } from "../shared/Cookie";
 
 import { history } from "../redux/configureStore";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
@@ -15,7 +15,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  // const is_login = useSelector((state) => state.user.user);
   const is_token = getCookie("token") ? true : false;
 
   useEffect(() => {

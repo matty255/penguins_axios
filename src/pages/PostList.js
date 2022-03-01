@@ -8,7 +8,7 @@ import { Intro } from "../elements";
 import { getCookie, deleteCookie } from "../shared/Cookie";
 const PostList = (props) => {
   const dispatch = useDispatch();
-  const {list, is_loading } = useSelector((state) => state.post);
+  const {list} = useSelector((state) => state.post);
 
   let [ is_loaded, setIsLoaded ] = useState(true);
 

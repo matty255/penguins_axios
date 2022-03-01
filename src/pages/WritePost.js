@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { NonGrid, Input, Button, Image, Text, NonFlexBox, Intro, PostText } from "../elements";
 import Upload from "../components/Upload";
 
@@ -6,15 +6,9 @@ import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as imageActions } from "../redux/modules/image";
-import tw from "tailwind-styled-components"
-import { inputAdornmentClasses } from "@mui/material";
-import { getCookie, deleteCookie } from "../shared/Cookie";
 
+import { getCookie } from "../shared/Cookie";
 
-const Font = tw.strong`
-font-sanss2 text-yellow-700 p-3 text-lg 
-bg-yellow-100 rounded-md mx-3 text-center
-`
 const is_token = getCookie("token") ? true : false;
 
 const WritePost = (props) => {
@@ -29,10 +23,8 @@ const WritePost = (props) => {
   const [input, setInput] = useState(_post ? _post.contents : "");
   let [ is_loaded, setIsLoaded ] = useState(false);
 
-  const use = React.useRef(null);
-
   useEffect(() => {
-    setTimeout(()=>{ setIsLoaded(false) }, 2000);
+    setTimeout(()=>{ setIsLoaded(false) }, 1000);
 }, [is_loaded])
 
   useEffect(() => {
@@ -48,7 +40,7 @@ const WritePost = (props) => {
     }
 
     if (is_edit) {
-      dispatch(imageActions.setPreview(_post.image_url));
+      dispatch(imageActions.setPreview(_post.img_url));
     }
   }, []);
 
@@ -66,10 +58,10 @@ const WritePost = (props) => {
   if (!is_token) {
     return (
       <NonFlexBox>
-        <Text size="32px" bold>
+        <Text>
           앗 잠깐!
         </Text>
-        <Text size="16px">로그인 후에만 글을 쓸 수 있어요!</Text>
+        <Text>로그인 후에만 글을 쓸 수 있어요!</Text>
         <Button
           _onClick={() => {
             history.replace("/login");
@@ -82,7 +74,7 @@ const WritePost = (props) => {
   }
 
   return (
-    <div className="px-1" ref={use}>
+    <div className="px-1">
       
       <NonGrid>
         <div className="flex flex-wrap text-3xl my-2">{is_edit ? "Edit" : "Write"}</div>

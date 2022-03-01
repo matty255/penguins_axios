@@ -29,12 +29,6 @@ const initialState = {
   is_loading: false,
 };
 
-// const initialPost = {
-//   image_url:
-//     "https://user-images.githubusercontent.com/75834421/124341016-6486ef80-dbf4-11eb-9a7a-bbfbb429810d.jpg",
-//   contents: "test-code",
-// };
-
 //middleware
 const loadPostAxios = () => {
   return function (dispatch, getState, { history }) {

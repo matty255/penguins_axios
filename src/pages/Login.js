@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { NonFlexBox, Title, Input, Button } from "../elements";
-// import { apiKey } from "../shared/firebase";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { useHistory } from "react-router-dom";
 
 import tw from "tailwind-styled-components";
 
@@ -13,24 +11,14 @@ const Margins = tw.div`
 `
 
 const Login = (props) => {
-  let history = useHistory();
   const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-  // const is_session = sessionStorage.getItem(_session_key) ? true : false;
-
-  // useEffect(() => {
-  //   if (is_session) {
-  //     alert("이미 로그인한 사용자입니다")
-  //     history.push("/");
-  //   }
-  // }, []);
 
   const login = () => {
-    // dispatch(userActions.loginFB(id, pwd));
+
     dispatch(userActions.loginAxios(username, password));
   };
 

@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text } from "../elements";
-
-import { apiKey } from "../shared/firebase";
 import { history } from "../redux/configureStore";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators as likeActions } from "../redux/modules/like";
-import { getCookie, deleteCookie } from "../shared/Cookie";
+import { getCookie } from "../shared/Cookie";
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const HeartButton = (props) => {
   const dispatch = useDispatch();
 
-  // const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-  // const is_session = sessionStorage.getItem(_session_key) ? true : false;
   const is_token = getCookie("token") ? true : false;
 
   const [like_cnt, setLikeCnt] = useState(props.like_cnt);

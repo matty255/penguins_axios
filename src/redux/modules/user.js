@@ -1,9 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
-// import { auth } from "../../shared/firebase";
-// import firebase from "firebase/app";
-
 import { setCookie, deleteCookie } from "../../shared/Cookie";
 
 import { instance } from '../../axios/axios';
@@ -35,9 +32,9 @@ const signupAxios = (username, password, name, check_password) => {
       password: password,
       check_password: check_password,
     };
-
+    // check_password: check_password,
     instance
-      .post("api/signup", user)
+    .post("api/signup", user)
       .then((res) => {
         window.alert("회원가입을 축하드립니다.");
         history.replace("/login");

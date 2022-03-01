@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NonGrid, NonFlexBox, Image, Text, Button, PostText } from "../elements";
-
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
-import { actionCreators as likeActions } from "../redux/modules/like";
 import { actionCreators as postActions } from "../redux/modules/post";
 
 import HeartButton from "./HeartButton";
@@ -33,13 +31,6 @@ const Post = (props) => {
             <NonGrid>
               <Text>By {user_id}</Text>
               <Text>{create_date}</Text>
-              {/* {props.is_me && (
-                <Button
-                  _onClick={() => {
-                    history.push(`/write/${post_id}`);
-                  }}
-                ><span className="text-xs sm:text-lg">Edit</span></Button>
-              )} */}
           </NonGrid>
           </div>
 
@@ -61,6 +52,11 @@ const Post = (props) => {
         >
           삭제하기
         </Button>
+            <Button
+              _onClick={() => {
+                history.push(`/write/${post_id}`);
+              }}
+            ><span className="text-xs sm:text-lg">Edit</span></Button>
         </div>
 
     </NonFlexBox>
