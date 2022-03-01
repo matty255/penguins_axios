@@ -7,11 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as imageActions } from "../redux/modules/image";
 import tw from "tailwind-styled-components"
+import { inputAdornmentClasses } from "@mui/material";
+import { getCookie, deleteCookie } from "../shared/Cookie";
+
 
 const Font = tw.strong`
 font-sanss2 text-yellow-700 p-3 text-lg 
 bg-yellow-100 rounded-md mx-3 text-center
 `
+const is_token = getCookie("token") ? true : false;
 
 const WritePost = (props) => {
   const dispatch = useDispatch();
@@ -19,22 +23,18 @@ const WritePost = (props) => {
   const preview = useSelector((state) => state.image.preview);
   const post_list = useSelector((state) => state.post.list);
 
-  const post_id = props.match.params.id;
+  const post_id = props.match.params.post_id;
   const is_edit = post_id ? true : false;
-  const _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
-  const [layout, setLayout] = useState(_post ? _post.layout : "bottom");
+  const _post = is_edit ? post_list.find((p) => p.post_id === post_id) : null;
+
   const [input, setInput] = useState(_post ? _post.contents : "");
   let [ is_loaded, setIsLoaded ] = useState(false);
 
   const use = React.useRef(null);
-  const scrolling = useCallback(e => {
-      use.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'center' });
-  }, []);
 
   useEffect(() => {
     setTimeout(()=>{ setIsLoaded(false) }, 2000);
-    scrolling();
-}, [is_loaded, scrolling])
+}, [is_loaded])
 
   useEffect(() => {
     //수정 페이지에서 새로고침을 하면 rerendering이 되면서 reducer의
@@ -55,21 +55,16 @@ const WritePost = (props) => {
 
   const addPost = () => {
     setIsLoaded(true);
-    dispatch(postActions.addPostFB(input, layout));
+    dispatch(postActions.addPostAxios(input));
   };
 
   const editPost = () => {
     setIsLoaded(true);
-    dispatch(postActions.updatePostFB(post_id, { contents: input, layout }));
+    dispatch(postActions.updatePostAxios(post_id, { contents: input }));
   };
 
-  const is_checked = (e) => {
-    if (e.target.checked) {
-      setLayout(e.target.value);
-    }
-  };
 
-  if (!is_login) {
+  if (!is_token) {
     return (
       <NonFlexBox>
         <Text size="32px" bold>
@@ -95,90 +90,6 @@ const WritePost = (props) => {
         <Upload />
         </NonGrid>
 
-      <NonFlexBox>
-        <input
-          type="radio"
-          name="layout"
-          value="right"
-          id="right"
-          onChange={is_checked}
-        />
-        <label htmlFor="right">
-          <Font
-            style={
-              layout === "right" ? { color: "#1B9CFC", margin: "10px" } : null
-            }
-          >
-            오른쪽에 이미지 왼쪽에 텍스트
-          </Font>
-        </label>
-      </NonFlexBox>
-
-
-        <div className="flex flex-row px-4">
-          <PostText>{input}</PostText>
-         <Image
-          half={true}
-          shape="big_square"
-          src={
-            preview
-              ? preview
-              : "https://user-images.githubusercontent.com/75834421/124501682-fb25fd00-ddfc-11eb-93ec-c0330dff399b.jpg"
-          }
-        />
-         </div>
-
-      <NonFlexBox>
-        <input
-          type="radio"
-          name="layout"
-          value="left"
-          id="left"
-          onChange={is_checked}
-        />
-        <label htmlFor="left">
-          <Font
-            style={
-              layout === "left" ? { color: "#1B9CFC", margin: "10px" } : null
-            }
-          >
-            왼쪽에 이미지 오른쪽에 텍스트
-          </Font>
-        </label>
-      </NonFlexBox>
-      <div className="flex flex-row px-4">
-        <Image
-          half={true}
-          shape="big_square"
-          src={
-            preview
-              ? preview
-              : "https://user-images.githubusercontent.com/75834421/124501682-fb25fd00-ddfc-11eb-93ec-c0330dff399b.jpg"
-          }
-        />
-        <PostText>{input}</PostText>
-      </div>
-
-      <NonFlexBox>
-        <input
-          type="radio"
-          name="layout"
-          value="bottom"
-          id="bottom"
-          onChange={is_checked}
-          style={{ color: "skyblue" }}
-        />
-        <label htmlFor="bottom">
-          {" "}
-          <Font
-            style={
-              layout === "bottom" ? { color: "#1B9CFC", margin: "10px" } : null
-            }
-          >
-            하단에 이미지 상단에 텍스트
-          </Font>
-        </label>
-      </NonFlexBox>
       <div className="flex flex-col px-4">
         <PostText>{input}</PostText>
         <Image

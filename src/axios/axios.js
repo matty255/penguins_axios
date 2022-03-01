@@ -7,6 +7,6 @@ const instance = axios.create({
 });
 
 const token = getCookie("token");
-
+// axios.defaults.crossDomain = true
 
 export { instance , token };

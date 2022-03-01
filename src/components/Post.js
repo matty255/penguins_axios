@@ -12,19 +12,18 @@ const Post = (props) => {
   const dispatch = useDispatch();
 
   const {
-    user_info,
-    image_url,
-    contents,
+    user_id, 
+    post_id, 
+    contents, 
+    img_url, 
     like_cnt,
-    insert_dt,
-    id,
-    layout,
-    comment_cnt,
-    show
+    create_date, 
+    modified_date,
+    like_ok,
   } = props;
 
   useEffect(() => {
-    dispatch(likeActions.getLikeFB(id));
+    dispatch(likeActions.getLikeFB(post_id));
   }, []);
   return (
     <NonFlexBox>
@@ -32,74 +31,31 @@ const Post = (props) => {
             <hr className="border-4 border-double border-white" />
             <NonGrid>
               <Image shape="circle" src={props.src} />
-              <Text>By {user_info.user_name}</Text>
-              <Text>{insert_dt}</Text>
+              <Text>By {user_id}</Text>
+              <Text>{create_date}</Text>
               {props.is_me && (
                 <Button
                   _onClick={() => {
-                    history.push(`/write/${id}`);
+                    history.push(`/write/${post_id}`);
                   }}
                 ><span className="text-xs sm:text-lg">Edit</span></Button>
               )}
           </NonGrid>
           </div>
 
-      {layout === "right" && (
-        <div>
-          <NonGrid>
-           {!show && <PostText>{contents}</PostText> }
-            <Image half={true} shape="big_square" src={image_url} />
-
-          </NonGrid>
-          <NonGrid>
-
-            <Text>좋아요 <span className="text-xl">{like_cnt}</span>개</Text>
-            <HeartButton post_id={id}></HeartButton>
-            <div className="cursor-pointer hover:scale-110 font-bold"><Text
-          _onClick={() => {
-            history.push(`/post/${id}`);
-          }}>댓글 <span className="text-xl">{comment_cnt}</span>개</Text></div>
-
-        </NonGrid>
-      </div>
-      )}
-
-      {layout === "left" && (
-        <div>
-          <NonGrid>
-            <Image half={true} shape="big_square" src={image_url} />
-            {!show && <PostText>{contents}</PostText> }
-          </NonGrid>
-
-
-          <NonGrid>
-            <Text>좋아요 <span className="text-xl">{like_cnt}</span>개</Text>
-            <HeartButton post_id={id}></HeartButton>
-            <div className="cursor-pointer hover:scale-110 font-bold"><Text
-          _onClick={() => {
-            history.push(`/post/${id}`);
-          }}>댓글 <span className="text-xl">{comment_cnt}</span>개</Text></div>
-            </NonGrid>
-          </div>
-      )}
-      {layout === "bottom" && (
         <div>
           <NonGrid>
             <div className="flex flex-col">
-            {!show && <PostText>{contents}</PostText> }
-            <Image shape="big_square" src={image_url} />
+            <PostText>{contents}</PostText>
+            <Image shape="big_square" src={img_url} />
             </div>
           </NonGrid>
           <NonGrid>
             <Text>좋아요 <span className="text-xl">{like_cnt}</span>개</Text>
-            <HeartButton post_id={id}></HeartButton>
-            <div className="cursor-pointer hover:scale-110 font-bold"><Text
-          _onClick={() => {
-            history.push(`/post/${id}`);
-          }}>댓글 <span className="text-xl">{comment_cnt}</span>개</Text></div>
+            <HeartButton post_id={post_id} is_like={like_ok}></HeartButton>
             </NonGrid>
         </div>
-      )}
+
     </NonFlexBox>
   );
 };
@@ -114,7 +70,6 @@ Post.defaultProps = {
     "https://user-images.githubusercontent.com/89088205/155067792-882e3507-e664-4b31-ad9a-4b7abf4af948.jpg",
   contents: "안녕! 피카!",
   like_cnt: 0,
-  comment_cnt: 0,
   insert_dt: "2021-06-30 10:00:00",
   show: false,
 };

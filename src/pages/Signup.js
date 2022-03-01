@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NonFlexBox, Title, Input, Button } from "../elements";
-import { emailCheck } from "../shared/check";
 // import { apiKey } from "../shared/firebase";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -28,10 +27,6 @@ const Signup = (props) => {
       return
     }
 
-    if (!emailCheck) {
-      window.alert("이메일 형식이 맞지 않습니다!");
-      return
-    }
     
     // dispatch(userActions.signUpFB(id, pwd, user_name));
     dispatch(userActions.signupAxios(username, password, name, check_password));

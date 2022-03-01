@@ -17,10 +17,10 @@ const HeartButton = (props) => {
   const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
   const is_session = sessionStorage.getItem(_session_key) ? true : false;
 
-  const { post_id } = props;
+  const { post_id, like_ok } = props;
 
   useEffect(() => {
-    if (like_list[post_id]?.includes(user_info?.uid)) {
+    if (like_ok) {
       setToggle(true);
     } else {
       setToggle(false);

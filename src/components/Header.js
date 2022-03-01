@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import { NonGrid, Button, Text, Image, Title } from "../elements";
-import NotiBadge from "./NotiBadge";
 import Permit from "../shared/Permit";
 import { getCookie, deleteCookie } from "../shared/Cookie";
 
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-// import { apiKey } from "../shared/firebase";
 
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -50,16 +48,6 @@ const Header = (props) => {
 
           </div>
 
-          <Permit>
-            <Button 
-            _onClick={() => {
-              history.push("/noti");
-            }}> 
-              <Permit>
-                <NotiBadge />
-              </Permit> <span className="hidden sm:contents"> 알림</span>
-            </Button>
-            </Permit>
 
           <Button
             _onClick={() => {

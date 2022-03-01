@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import { NonFlexBox, Title, Input, Button } from "../elements";
-import { emailCheck } from "../shared/check";
 // import { apiKey } from "../shared/firebase";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";

@@ -15,9 +15,7 @@ import Signup from "../pages/Signup";
 import Header from "../components/Header";
 import WritePost from "../pages/WritePost";
 
-import PostDetail from "../pages/PostDetail";
 import Caution from "../pages/Caution";
-import NotiDetail from "../pages/NotiDetail";
 import NotFound from "../components/NotFound";
 
 const Container = tw.div`
@@ -49,8 +47,6 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/write" component={WritePost} />
             <Route exact path="/write/:id" component={WritePost} />
-            <Route exact path="/post/:id" component={PostDetail} />
-            <Route exact path="/noti" component={NotiDetail} />
             <Route exact path="/caution" component={Caution} />
             <Route component={NotFound} />
           </ConnectedRouter>
