@@ -12,6 +12,7 @@ const cancelLike = createAction(CANCEL_LIKE, (post_id) => ({ post_id }));
 
 const initialState = {
   like_cnt: 0,
+  post_id: 0
 };
 
 
@@ -19,17 +20,16 @@ const addLikeAxios = (post_id) => {
   return function (dispatch, getState, { history }) {
     instance
       .post(
-        `/api/favorite/${post_id}`,
+        `/api/favorite/${post_id}`, post_id,
         {
           headers: {
             "X-AUTH-TOKEN": token,
           },
-        },
-        { withCredentials: true }
-      )
+          withCredentials: true,
+        })
+
       .then((docs) => {
-        // console.log(docs);
-        dispatch(addLike(post_id));
+
       })
       .catch((err) => {
         console.log("like::: ", err.response);
@@ -46,17 +46,16 @@ const cancelLikeAxios = (post_id) => {
   return function (dispatch, getState, { history }) {
     instance
       .post(
-        `/api/favorite/${post_id}`,
+        `/api/favorite/${post_id}`, post_id,
         {
           headers: {
             "X-AUTH-TOKEN": token,
           },
-        },
-        { withCredentials: true }
-      )
-      .then((docs) => {
-        // console.log(docs);
-        dispatch(cancelLike(post_id));
+          withCredentials: true,
+        })
+
+      .then((res) => {
+
       })
       .catch((err) => {
         console.log("like::: ", err.response);
@@ -67,16 +66,9 @@ const cancelLikeAxios = (post_id) => {
 export default handleActions(
   {
 
-    [ADD_LIKE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.list[action.payload.post_id].push(action.payload.user_id);
-      }),
-    [CANCEL_LIKE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.list[action.payload.post_id] = draft.list[
-          action.payload.post_id
-        ].filter((l) => l !== action.payload.user_id);
-      }),
+    [ADD_LIKE]: (state, action) => produce(state, (draft) => {}),
+
+    [CANCEL_LIKE]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );

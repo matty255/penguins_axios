@@ -16,10 +16,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 const Header = (props) => {
   const dispatch = useDispatch();
   // const is_login = useSelector((state) => state.user.user);
-  const user_info = useSelector((state) => state.user.user);
   const is_token = getCookie("token") ? true : false;
-  // const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-  // const is_session = sessionStorage.getItem(_session_key) ? true : false;
 
   useEffect(() => {
     if (is_token) {
@@ -28,6 +25,7 @@ const Header = (props) => {
       return
     }
   }, []);
+  
   if (is_token) {
     return (
       
@@ -38,16 +36,6 @@ const Header = (props) => {
                 Penguins
         </Title>
       
-          <div className="hidden lg:contents">
-            <div className="flex items-end p-1 px-10">
-              <Image shape="circle" src={props.src} />
-              <Text>
-                <span className="mb-2 mx-1 inline-flex font-bold">{user_info?.username}</span>
-              </Text>
-              </div>
-
-          </div>
-
 
           <Button
             _onClick={() => {

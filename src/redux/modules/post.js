@@ -38,10 +38,14 @@ const initialState = {
 //middleware
 const loadPostAxios = () => {
   return function (dispatch, getState, { history }) {
-
     dispatch(loading(true));
     instance
-      .get(`api/posts`)
+      .get(`api/posts`, {
+        headers: {
+          "X-AUTH-TOKEN": token,
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         dispatch(loadPost(res.data));
       })
@@ -73,9 +77,10 @@ const addPostAxios = (contents) => {
       })
       .then((url) => {
         const data = { contents, img_url: url };
-        console.log(data)
+        // console.log(data)
         instance
-          .post(`api/posts`, data, {
+          .post(`api/posts`, data, 
+          {
             headers: {
               "X-AUTH-TOKEN": token,
             },
@@ -83,7 +88,6 @@ const addPostAxios = (contents) => {
           })
           .then((doc) => {
             history.push("/");
-            dispatch(addPost(doc.data));
             dispatch(imageActions.setPreview(null));
           })
           .catch((err) => {
@@ -123,9 +127,9 @@ const updatePostAxios = (post_id = null, post = {}) => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(updatePost(post_id, updatePostData))
-          history.replace("/");
           dispatch(updatePost(post_id, updatePostData));
+          history.replace("/");
+          
         })
         .catch((err) => console.log("업데이트 게시글::::: ", err.response));
       return;
@@ -165,7 +169,7 @@ const updatePostAxios = (post_id = null, post = {}) => {
   };
 };
 
-const deletePostAxios = (post_id = null) => {
+const deletePostAxios = (post_id) => {
   return function (dispatch, getState, { history }) {
     if (!post_id) {
       console.log("게시물 정보가 없어요!");
@@ -180,7 +184,7 @@ const deletePostAxios = (post_id = null) => {
         withCredentials: true,
       })
       .then(() => {
-        history.replace("/");
+        window.location.replace("/")
         dispatch(deletePost(post_id));
       })
       .catch((err) => console.log("게시글삭제::::: ", err.response));

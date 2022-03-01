@@ -19,7 +19,6 @@ const is_token = getCookie("token") ? true : false;
 
 const WritePost = (props) => {
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.is_login);
   const preview = useSelector((state) => state.image.preview);
   const post_list = useSelector((state) => state.post.list);
 
@@ -60,7 +59,7 @@ const WritePost = (props) => {
 
   const editPost = () => {
     setIsLoaded(true);
-    dispatch(postActions.updatePostAxios(post_id, { contents: input }));
+    // dispatch(postActions.updatePostAxios(post_id, { contents: input }));
   };
 
 
