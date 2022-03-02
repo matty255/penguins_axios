@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NonFlexBox, Title, Input, Button } from "../elements";
-// import { apiKey } from "../shared/firebase";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { getCookie, deleteCookie } from "../shared/Cookie";
+import { getCookie } from "../shared/Cookie";
 
 import tw from "tailwind-styled-components";
 
@@ -14,7 +13,7 @@ const Margins = tw.div`
 const Signup = (props) => {
   let history = useHistory();
   const dispatch = useDispatch();
-  const jwtToken = getCookie("token") ? true : false;
+  const is_token = getCookie("token") ? true : false;
 
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -27,20 +26,15 @@ const Signup = (props) => {
       return
     }
 
-    
-    // dispatch(userActions.signUpFB(id, pwd, user_name));
     dispatch(userActions.signupAxios(username, password, name, check_password));
   };
 
-  // const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-  // const is_session = sessionStorage.getItem(_session_key) ? true : false;
-
-  // useEffect(() => {
-  //   if (is_session) {
-  //     alert("이미 로그인한 사용자입니다")
-  //     history.push("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (is_token) {
+      alert("이미 로그인한 사용자입니다")
+      history.push("/");
+    }
+  }, []);
   
 
   return (

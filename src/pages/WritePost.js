@@ -28,11 +28,6 @@ const WritePost = (props) => {
 }, [is_loaded])
 
   useEffect(() => {
-    //수정 페이지에서 새로고침을 하면 rerendering이 되면서 reducer의
-    // store안의 내용물이 사라진다..그래서 주소창에 post의 id값은 있지만(is_edit)
-    // post는 없는 경우가 되므로 그때는 그냥 강제뒤로가기! 그러고 나서 끝나야 되므로
-    // return! (여기서 return 안하면 밑에 것도 수행되면서 is_edit은 있고 post는 없는데
-    //image_url 찾는다면서 오류발생!)
     if (is_edit && !_post && preview) {
       console.log("포스트 정보가 없어요! ㅜㅜ");
       history.goBack();
