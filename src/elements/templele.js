@@ -19,12 +19,13 @@ const WritePost = (props) => {
   const post_id = props.location.pathname.split("/")[2]
   const is_edit = post_id ? true : false;
   const _post = is_edit ? post_list.filter(p => p.post_id == post_id) : null;
+  console.log(_post[0])
   
   const [input, setInput] = useState(_post ? _post[0].contents : "");
   let [ is_loaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    setTimeout(()=>{ setIsLoaded(false) }, 4000);
+    setTimeout(()=>{ setIsLoaded(false) }, 1000);
 }, [is_loaded])
 
   useEffect(() => {
@@ -77,9 +78,8 @@ const WritePost = (props) => {
     <div className="px-1">
       
       <NonGrid>
-        <div className="flex flex-wrap text-3xl my-2">{is_edit ? "Edit" : "Write"}
-        </div>
-        {!is_edit && <Upload />}
+        <div className="flex flex-wrap text-3xl my-2">{is_edit ? "Edit" : "Write"}</div>
+        <Upload />
         </NonGrid>
 
       <div className="flex flex-col px-4">

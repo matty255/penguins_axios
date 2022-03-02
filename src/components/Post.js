@@ -45,6 +45,7 @@ const Post = (props) => {
               
             <HeartButton post_id={post_id} like_ok={like_ok} like_cnt={like_cnt}></HeartButton>
             </NonGrid>
+            <div className="flex gap-4 justify-end mr-4">
             <Button
           _onClick={() => {
             dispatch(postActions.deletePostAxios(props.post_id));
@@ -56,7 +57,8 @@ const Post = (props) => {
               _onClick={() => {
                 history.push(`/write/${post_id}`);
               }}
-            ><span className="text-xs sm:text-lg">Edit</span></Button>
+            >Edit</Button>
+            </div>
         </div>
 
     </NonFlexBox>

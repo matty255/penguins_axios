@@ -97,69 +97,26 @@ const addPostAxios = (contents) => {
 };
 };
 
-const updatePostAxios = (post_id = null, post = {}) => {
+const updatePostAxios = (post_id, post={}) => {
   return function (dispatch, getState, { history }) {
     if (!post_id) {
       console.log("게시물 정보가 없어요!");
       return;
     }
+    const data = { contents: post.contents, img_url: post.img_url}
 
-    const _image = getState().image.preview;
-    const _postIdx = getState().post.list.find((p) => p.post_Id === post_id);
-    const _post = getState().post.list[_postIdx];
-    const updatePostData = {
-      ..._post,
-      img_url: _post.img_url,
-    };
-
-    if (_image === _post.img_url) {
       instance
-        .patch(`api/posts/${post_id}`, updatePostData, {
+        .patch(`api/posts/${post_id}`, data, {
           headers: {
             "X-AUTH-TOKEN": token,
           },
           withCredentials: true,
         })
         .then((res) => {
-          dispatch(updatePost(post_id, updatePostData));
           history.replace("/");
           
         })
         .catch((err) => console.log("업데이트 게시글::::: ", err.response));
-      return;
-    } else {
-      const _upload = storage
-        .ref(`images/${post_id}_${new Date().getTime()}`)
-        .putString(_image, "data_url");
-      _upload.then((snapshot) => {
-        snapshot.ref
-          .getDownloadURL()
-          .then((url) => {
-            return url;
-          })
-          .then((url) => {
-            instance
-              .put(
-                `api/post/${post_id}`,
-                { ...post, img_url: url },
-                {
-                  headers: {
-                    "X-AUTH-TOKEN": token,
-                  },
-                  withCredentials: true,
-                })
-              .then((res) => {
-                console.log(res)
-                history.replace("/");
-                dispatch(updatePost(post_id, { ...post, img_url: url }));
-              })
-              .catch((err) => console.log(" ", err.response));
-          })
-          .catch((err) => {
-            console.log("업데이트 게시글::::: ", err.response);
-          });
-      });
-    }
   };
 };
 
@@ -181,7 +138,7 @@ const deletePostAxios = (post_id) => {
         window.location.replace("/")
         dispatch(deletePost(post_id));
       })
-      .catch((err) => console.log("게시글삭제::::: ", err.response));
+      .catch((err) => alert(err.response.data.errorMessage));
   };
 };
 
