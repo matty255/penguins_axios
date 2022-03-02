@@ -116,7 +116,8 @@ const updatePostAxios = (post_id, post={}) => {
           history.replace("/");
           
         })
-        .catch((err) => console.log("업데이트 게시글::::: ", err.response));
+        .catch((err) => alert(err.response.data.errorMessage));
+        history.replace("/");
   };
 };
 

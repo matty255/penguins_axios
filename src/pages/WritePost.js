@@ -18,9 +18,9 @@ const WritePost = (props) => {
   // console.log(post_list)
   const post_id = props.location.pathname.split("/")[2]
   const is_edit = post_id ? true : false;
-  const _post = is_edit ? post_list.filter(p => p.post_id == post_id) : null;
+  const _post = is_edit ? post_list?.filter(p => p.post_id == post_id) : null;
   
-  const [input, setInput] = useState(_post ? _post[0].contents : "");
+  const [input, setInput] = useState(_post ? _post[0]?.contents : "");
   let [ is_loaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
@@ -33,14 +33,14 @@ const WritePost = (props) => {
     // post는 없는 경우가 되므로 그때는 그냥 강제뒤로가기! 그러고 나서 끝나야 되므로
     // return! (여기서 return 안하면 밑에 것도 수행되면서 is_edit은 있고 post는 없는데
     //image_url 찾는다면서 오류발생!)
-    if (is_edit && !_post) {
+    if (is_edit && !_post && preview) {
       console.log("포스트 정보가 없어요! ㅜㅜ");
       history.goBack();
       return;
     }
 
     if (is_edit) {
-      dispatch(imageActions.setPreview(_post[0].img_url));
+      dispatch(imageActions.setPreview(_post[0]?.img_url));
     }
   }, []);
 
