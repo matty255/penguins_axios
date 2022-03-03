@@ -10,11 +10,7 @@ const Title = (props) => {
   const { children, _onClick } =
   props;
 
-const styles = {
-  children,
-};
-
-  return <TitleText {...styles} onClick={_onClick} >{children}</TitleText>;
+  return <TitleText onClick={_onClick} >{children}</TitleText>;
 };
 
 Title.defaultProps = {

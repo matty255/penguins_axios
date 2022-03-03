@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { NonFlexBox, Title, Input, Button } from "../elements";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-
+import { getCookie } from "../shared/Cookie";
 import tw from "tailwind-styled-components";
+import { history } from "../redux/configureStore";
 
 const Margins = tw.div` 
   mt-24 mx-4 pb-10
 `
+const is_token = getCookie("token") ? true : false;
 
 const Login = (props) => {
   const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    if (is_token) {
+      alert("이미 로그인한 사용자입니다")
+      history.push("/");
+    }
+  }, []);
 
 
   const login = () => {
-
     dispatch(userActions.loginAxios(username, password));
   };
 

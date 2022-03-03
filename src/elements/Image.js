@@ -14,31 +14,31 @@ const SmallSquareImage = tw.img`
 
 const BigSquareImage = tw.img`
   w-full bg-cover rounded-xl p-1
+  ${(props) => (props.half ? "flex-auto" : "")}
+  ${(props) => (props.half ? "w-3/4" : "")}
 `;
 
 const Image = (props) => {
-  const { src, shape} = props;
+  const { src, shape, half } = props;
 
-  const styles = {
-    src,
-  };
 
   if (shape === "circle") {
-    return <CircleImage {...styles} src={src} />;
+    return <CircleImage src={src} />;
   }
 
   if (shape === "big_square") {
-    return <BigSquareImage {...styles} src={src} />;
+    return <BigSquareImage src={src} />;
   }
 
   if (shape === "small_square") {
-    return <SmallSquareImage {...styles} src={src} />;
+    return <SmallSquareImage src={src} />;
   }
 };
 
 Image.defaultProps = {
   shape: "circle",
   src: "https://user-images.githubusercontent.com/89088205/155078987-592a07cd-a490-49fc-aabc-bc47cb508963.jpg",
+  half: false,
 };
  
 

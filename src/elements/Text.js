@@ -9,11 +9,8 @@ const Text = (props) => {
   const { children, _onClick} =
     props;
 
-  const styles = {
-    children,
-  };
   return (
-    <P {...styles} onClick={_onClick}>
+    <P onClick={_onClick}>
       {children}
     </P>
   );
@@ -22,7 +19,6 @@ const Text = (props) => {
 Text.defaultProps = {
   children: null,
   _onClick: () => {},
-  is_click: false,
 };
 
 
