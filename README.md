@@ -6,14 +6,14 @@
 ## step 1 완성 : 파이어베이스로 구현한 매거진 사이트
 ### firebase + github actions hosting : [Click!](https://penguins-test.firebaseapp.com/) 
 
-## step 3 성공! <-- axios 레파지토리는 여기! 배포 전입니다.
+## step 2 성공! <-- axios 레파지토리는 여기! 배포 전입니다.
 백엔드와 로그인, 회원가입, CRUD,  좋아요 기능을 연결하는데 성공!
 
 백엔드로 가입하는 아이디/비밀번호는 파이어베이스와 양식이 조금 달라서 레파지토리를 따로 팠어요! 
 
 사용기술 : Axios, dotenv, http-proxy-middleware 
 
-## step 4 성공!
+## step 3 성공!
 LCP 4.2초 -> 1.8 ~ 2.0초 (크롬 플러그인으로 돌렸을 때)
 이 사이트에서 돌리면 0.9초 https://pagespeed.web.dev/ 여기서 돌리세여
 
