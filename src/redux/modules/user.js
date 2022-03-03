@@ -57,11 +57,13 @@ const loginAxios = (username, password) => {
         // 다른 도메인간 쿠키 전송하기?? 나중에 검색
       )
       .then((res) => {
-        console.log(res)
+
         if (res.status === 200) {
           dispatch(setUser({ username, password }));
           window.alert('로그인 되었습니다.');
-          setCookie("token", res.data);
+          // console.log(setCookie("token", res.data))
+          // console.log(res)
+          setCookie("token", res.data)
           window.location.replace("/")
           
         }

@@ -6,12 +6,11 @@ const P = tw.p`
 `;
 
 const Text = (props) => {
-  const { children, _onClick, is_click } =
+  const { children, _onClick} =
     props;
 
   const styles = {
     children,
-    is_click,
   };
   return (
     <P {...styles} onClick={_onClick}>

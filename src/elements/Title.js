@@ -7,12 +7,11 @@ const TitleText = tw.div`
 `;
 
 const Title = (props) => {
-  const { children, _onClick, is_click } =
+  const { children, _onClick } =
   props;
 
 const styles = {
   children,
-  is_click,
 };
 
   return <TitleText {...styles} onClick={_onClick} >{children}</TitleText>;
@@ -21,7 +20,6 @@ const styles = {
 Title.defaultProps = {
   children: null,
   _onClick: () => {},
-  is_click: false,
 };
 
 

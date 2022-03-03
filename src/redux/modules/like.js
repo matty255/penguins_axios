@@ -32,7 +32,7 @@ const addLikeAxios = (post_id) => {
 
       })
       .catch((err) => {
-        console.log("like::: ", err.response);
+        // console.log("like::: ", err.response);
       });
   }
 
@@ -58,7 +58,7 @@ const cancelLikeAxios = (post_id) => {
 
       })
       .catch((err) => {
-        console.log("like::: ", err.response);
+        // console.log("like::: ", err.response);
       });
   };
 };

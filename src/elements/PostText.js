@@ -8,12 +8,11 @@ const P = tw.p`
 `;
 
 const PostText = (props) => {
-  const { children, _onClick, is_click, is_false } =
+  const { children, _onClick, is_false } =
     props;
 
   const styles = {
     children,
-    is_click,
     is_false,
   };
   return (
@@ -26,7 +25,6 @@ const PostText = (props) => {
 Text.defaultProps = {
   children: null,
   _onClick: () => {},
-  is_click: false,
   is_false : false
 };
 

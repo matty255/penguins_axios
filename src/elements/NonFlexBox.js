@@ -11,18 +11,13 @@ const Btime = tw.div`
 const NonFlexBox = (props) => {
   const {
     children,
-    is_flex,
     _onClick,
-    is_main,
+
   } = props;
 
-  const styles = {
-    is_flex,
-    is_main,
-  };
   return (
       <React.Fragment>
-    <Btime {...styles} onClick={_onClick}>
+    <Btime onClick={_onClick}>
       {children}
     </Btime>
     </React.Fragment>
@@ -31,12 +26,6 @@ const NonFlexBox = (props) => {
 
 NonFlexBox.defaultProps = {
   children: null,
-  is_flex: false,
-  width: "100%",
-  padding: false,
-  margin: false,
-  bg: false,
-  relative: false,
   _onClick: () => {},
 };
 

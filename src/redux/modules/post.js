@@ -81,7 +81,7 @@ const addPostAxios = (contents) => {
             withCredentials: true,
           })
           .then((doc) => {
-            history.push("/");
+            window.location.replace("/")
             dispatch(imageActions.setPreview(null));
           })
           .catch((err) => {
@@ -139,7 +139,7 @@ const deletePostAxios = (post_id) => {
         window.location.replace("/")
         dispatch(deletePost(post_id));
       })
-      .catch((err) => console.log(err.response.errorMessage));
+      .catch((err) => alert(err.response.data.errorMessage));
   };
 };
 

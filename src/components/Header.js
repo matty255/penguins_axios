@@ -31,7 +31,7 @@ const Header = (props) => {
       <NonGrid>
         <Title _onClick={() => {
               history.push("/");
-            }} is_click={true}>
+            }}>
                 Penguins
         </Title>
       
@@ -60,7 +60,7 @@ const Header = (props) => {
     <NonGrid>
         <Title _onClick={() => {
               window.location.replace("/");
-            }} is_click={true}>
+            }}>
                 Penguins
         </Title>
 

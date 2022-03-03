@@ -29,7 +29,7 @@ const WritePost = (props) => {
 
   useEffect(() => {
     if (is_edit && !_post && preview) {
-      console.log("포스트 정보가 없어요! ㅜㅜ");
+      alert("포스트 정보가 없어요! ㅜㅜ");
       history.goBack();
       return;
     }
